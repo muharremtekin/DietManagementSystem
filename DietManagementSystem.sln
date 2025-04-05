@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35506.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D263ED0E-F635-421F-8D2E-1C7058D345D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DietManagementSystem.Application", "src\DietManagementSystem.Application\DietManagementSystem.Application.csproj", "{D4A75AF5-0C07-4387-9CD3-069B2C3C4890}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DietManagementSystem.Domain", "src\DietManagementSystem.Domain\DietManagementSystem.Domain.csproj", "{4115ED97-C179-4D4B-A160-D350E376E8EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DietManagementSystem.Infrastructure", "src\DietManagementSystem.Infrastructure\DietManagementSystem.Infrastructure.csproj", "{DC55A195-90A4-47EF-8FDD-D4BD998203CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DietManagementSystem.WebApi", "src\DietManagementSystem.WebApi\DietManagementSystem.WebApi.csproj", "{4FD890EB-3474-41FA-9064-5C0C5828188C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DietManagementSystem.Application.Tests", "src\DietManagementSystem.Application.Tests\DietManagementSystem.Application.Tests.csproj", "{342E296C-D700-43CC-8808-8290AE776909}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D4A75AF5-0C07-4387-9CD3-069B2C3C4890}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4A75AF5-0C07-4387-9CD3-069B2C3C4890}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4A75AF5-0C07-4387-9CD3-069B2C3C4890}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4A75AF5-0C07-4387-9CD3-069B2C3C4890}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4115ED97-C179-4D4B-A160-D350E376E8EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4115ED97-C179-4D4B-A160-D350E376E8EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4115ED97-C179-4D4B-A160-D350E376E8EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4115ED97-C179-4D4B-A160-D350E376E8EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC55A195-90A4-47EF-8FDD-D4BD998203CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC55A195-90A4-47EF-8FDD-D4BD998203CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC55A195-90A4-47EF-8FDD-D4BD998203CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC55A195-90A4-47EF-8FDD-D4BD998203CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FD890EB-3474-41FA-9064-5C0C5828188C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FD890EB-3474-41FA-9064-5C0C5828188C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FD890EB-3474-41FA-9064-5C0C5828188C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FD890EB-3474-41FA-9064-5C0C5828188C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{342E296C-D700-43CC-8808-8290AE776909}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{342E296C-D700-43CC-8808-8290AE776909}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{342E296C-D700-43CC-8808-8290AE776909}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{342E296C-D700-43CC-8808-8290AE776909}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D4A75AF5-0C07-4387-9CD3-069B2C3C4890} = {D263ED0E-F635-421F-8D2E-1C7058D345D5}
+		{4115ED97-C179-4D4B-A160-D350E376E8EE} = {D263ED0E-F635-421F-8D2E-1C7058D345D5}
+		{DC55A195-90A4-47EF-8FDD-D4BD998203CF} = {D263ED0E-F635-421F-8D2E-1C7058D345D5}
+		{4FD890EB-3474-41FA-9064-5C0C5828188C} = {D263ED0E-F635-421F-8D2E-1C7058D345D5}
+		{342E296C-D700-43CC-8808-8290AE776909} = {D263ED0E-F635-421F-8D2E-1C7058D345D5}
+	EndGlobalSection
+EndGlobal
