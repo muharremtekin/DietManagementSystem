@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  postgresql:
+    image: postgres:latest
+    container_name: postgresql
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: DietManagementLocalDb
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - local-network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+
+networks:
+  local-network:
+    name: local-network
+    driver: bridge
