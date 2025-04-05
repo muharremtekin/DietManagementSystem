@@ -2,19 +2,16 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace DietManagementSystem.Infrastructure.EntitiyConfigurations;
+namespace DietManagementSystem.Persistence.EntitiyConfigurations;
 
 public class DietPlanConfiguration : BaseEntityConfiguration<DietPlan>
 {
     public override void Configure(EntityTypeBuilder<DietPlan> builder)
     {
-        // BaseEntity'den gelen yapılandırmaları uygula
         base.Configure(builder);
 
-        // Tablo adı
         builder.ToTable("DietPlans");
 
-        // Alan yapılandırmaları
         builder.Property(dp => dp.Title)
             .IsRequired()
             .HasMaxLength(100);
@@ -29,7 +26,6 @@ public class DietPlanConfiguration : BaseEntityConfiguration<DietPlan>
             .IsRequired()
             .HasPrecision(5, 2);
 
-        // İlişkiler
         builder.HasOne(dp => dp.Dietitian)
             .WithMany(d => d.DietPlans)
             .HasForeignKey(dp => dp.DietitianId)

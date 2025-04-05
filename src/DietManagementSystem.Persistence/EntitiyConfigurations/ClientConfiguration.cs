@@ -2,21 +2,18 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace DietManagementSystem.Infrastructure.EntitiyConfigurations;
+namespace DietManagementSystem.Persistence.EntitiyConfigurations;
 
 public class ClientConfiguration : IEntityTypeConfiguration<Client>
 {
     public void Configure(EntityTypeBuilder<Client> builder)
     {
-        // Tablo adı (TPT)
         builder.ToTable("Clients");
 
-        // Alan yapılandırmaları
         builder.Property(c => c.InitialWeight)
-            .HasPrecision(5, 2); // 5 hane, 2 ondalık
+            .HasPrecision(5, 2);
 
-        builder.Property(c => c.BirthDate)
-            .IsRequired(false); // Opsiyonel
+        builder.Property(c => c.BirthDate);
 
         // İlişkiler
         builder.HasOne(c => c.Dietitian)

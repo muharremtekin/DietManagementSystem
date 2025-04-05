@@ -1,10 +1,10 @@
 ﻿using DietManagementSystem.Application.Interfaces.Repositories;
 using DietManagementSystem.Domain.Entities;
-using DietManagementSystem.Infrastructure.Context;
+using DietManagementSystem.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
-namespace DietManagementSystem.Infrastructure.Repositories;
+namespace DietManagementSystem.Persistence.Repositories;
 public class EntityRepository<TEntity> : IEntityRepository<TEntity> where TEntity : BaseEntity
 {
     private readonly ApplicationDbContext dbContext;

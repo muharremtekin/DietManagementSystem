@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace DietManagementSystem.Infrastructure.EntitiyConfigurations;
+namespace DietManagementSystem.Persistence.EntitiyConfigurations;
 
 public abstract class BaseEntityConfiguration<T> : IEntityTypeConfiguration<T> where T : BaseEntity
 {
