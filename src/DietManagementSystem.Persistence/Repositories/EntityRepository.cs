@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace DietManagementSystem.Persistence.Repositories;
-public class EntityRepository<TEntity> : IEntityRepository<TEntity> where TEntity : BaseEntity
+public abstract class EntityRepository<TEntity> : IEntityRepository<TEntity> where TEntity : BaseEntity
 {
     private readonly ApplicationDbContext dbContext;
     protected DbSet<TEntity> entity => dbContext.Set<TEntity>();
