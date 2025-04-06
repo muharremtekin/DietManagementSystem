@@ -10,8 +10,6 @@ public class DietPlanConfiguration : BaseEntityConfiguration<DietPlan>
     {
         base.Configure(builder);
 
-        builder.ToTable("DietPlans");
-
         builder.Property(dp => dp.Title)
             .IsRequired()
             .HasMaxLength(100);
@@ -23,22 +21,26 @@ public class DietPlanConfiguration : BaseEntityConfiguration<DietPlan>
             .IsRequired();
 
         builder.Property(dp => dp.InitialWeight)
-            .IsRequired()
-            .HasPrecision(5, 2);
-
-        builder.HasOne(dp => dp.Dietitian)
-            .WithMany(d => d.DietPlans)
-            .HasForeignKey(dp => dp.DietitianId)
-            .OnDelete(DeleteBehavior.Restrict);
+            .IsRequired();
 
         builder.HasOne(dp => dp.Client)
-            .WithMany(c => c.DietPlans)
+            .WithMany(u => u.DietPlansAsClient)
             .HasForeignKey(dp => dp.ClientId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        builder.HasOne(dp => dp.Dietitian)
+            .WithMany(u => u.DietPlansAsDietitian)
+            .HasForeignKey(dp => dp.DietitianId)
             .OnDelete(DeleteBehavior.Restrict);
 
         builder.HasMany(dp => dp.Meals)
             .WithOne(m => m.DietPlan)
             .HasForeignKey(m => m.DietPlanId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasMany(dp => dp.ProgressEntries)
+            .WithOne(p => p.DietPlan)
+            .HasForeignKey(p => p.DietPlanId)
             .OnDelete(DeleteBehavior.Cascade);
     }
 }

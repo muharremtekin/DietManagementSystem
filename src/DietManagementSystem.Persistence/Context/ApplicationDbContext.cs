@@ -11,8 +11,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityR
     {
     }
 
-    public DbSet<Dietitian> Dietitians { get; set; }
-    public DbSet<Client> Clients { get; set; }
     public DbSet<DietPlan> DietPlans { get; set; }
     public DbSet<Meal> Meals { get; set; }
 

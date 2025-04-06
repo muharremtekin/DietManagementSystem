@@ -10,21 +10,15 @@ public class MealConfiguration : BaseEntityConfiguration<Meal>
     {
         base.Configure(builder);
 
-        builder.ToTable("Meals");
-
         builder.Property(m => m.Title)
             .IsRequired()
-            .HasMaxLength(50);
+            .HasMaxLength(100);
 
         builder.Property(m => m.StartTime)
             .IsRequired();
 
         builder.Property(m => m.EndTime)
             .IsRequired();
-
-        builder.Property(m => m.Description)
-            .IsRequired()
-            .HasMaxLength(500);
 
         builder.HasOne(m => m.DietPlan)
             .WithMany(dp => dp.Meals)

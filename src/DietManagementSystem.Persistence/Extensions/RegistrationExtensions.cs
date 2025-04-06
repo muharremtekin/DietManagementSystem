@@ -20,7 +20,7 @@ public static class RegistrationExtensions
         });
 
         services.AddScoped<IDietPlanRepository, DietPlanRepository>();
-        services.AddScoped<IMealRepository, IMealRepository>();
+        services.AddScoped<IMealRepository, MealRepository>();
 
         return services;
     }
