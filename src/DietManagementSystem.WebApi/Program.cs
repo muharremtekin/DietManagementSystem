@@ -1,15 +1,46 @@
+using DietManagementSystem.Application.Extensions;
+using DietManagementSystem.Domain.Entities;
+using DietManagementSystem.Persistence.Context;
+using DietManagementSystem.WebApi.Extensions;
+using Microsoft.AspNetCore.Identity;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+});
+
+builder.Services.AddApplicationResgistration();
+builder.Services.AddPersistanceRegistrations(builder.Configuration);
+
+builder.Services.AddIdentityCore<ApplicationUser>()
+                .AddRoles<IdentityRole<Guid>>()
+                .AddRoleManager<RoleManager<IdentityRole<Guid>>>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+
+builder.Services.ConfigureAuth(builder.Configuration);
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+//app.ConfigureExceptionHandler();
+
+if (!app.Environment.IsDevelopment())
+    await app.MigrateDatabaseAsync();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -17,6 +48,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

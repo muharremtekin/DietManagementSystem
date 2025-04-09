@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 using System.Reflection;
 
 namespace DietManagementSystem.Persistence.Context;
@@ -11,8 +12,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityR
     {
     }
 
-    public DbSet<Dietitian> Dietitians { get; set; }
-    public DbSet<Client> Clients { get; set; }
     public DbSet<DietPlan> DietPlans { get; set; }
     public DbSet<Meal> Meals { get; set; }
 
@@ -23,6 +22,32 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityR
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+
+        foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+        {
+            // Eğer entity IBaseEntity'yi implement ediyorsa
+            if (typeof(IBaseEntity).IsAssignableFrom(entityType.ClrType))
+            {
+                // entity için bir lambda ifadesi oluşturuyoruz: e => !e.IsDeleted
+                var parameter = Expression.Parameter(entityType.ClrType, "e");
+
+                // EF.Property<bool>(e, "IsDeleted")
+                var isDeletedProperty = Expression.Call(
+                    typeof(EF).GetMethod("Property")!.MakeGenericMethod(typeof(bool)),
+                    parameter,
+                    Expression.Constant("IsDeleted")
+                );
+
+                // !EF.Property<bool>(e, "IsDeleted")
+                var filterExpression = Expression.Equal(isDeletedProperty, Expression.Constant(false));
+
+                var lambda = Expression.Lambda(filterExpression, parameter);
+
+                // Global query filter olarak ekliyoruz.
+                modelBuilder.Entity(entityType.ClrType).HasQueryFilter(lambda);
+            }
+        }
+
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
     }
     public override int SaveChanges()
@@ -48,19 +73,18 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityR
 
     private void OnBeforeSave()
     {
+        var now = DateTime.UtcNow;
         var addedEntities = ChangeTracker
-                                .Entries()
+                                .Entries<IBaseEntity>()
                                 .Where(e => e.State == EntityState.Added)
-                                .Select(e => (BaseEntity)e.Entity);
-        PrepareAddedEntities(addedEntities);
-    }
+                                .Select(e => e.Entity)
+                                .ToArray();
 
-    private void PrepareAddedEntities(IEnumerable<BaseEntity> entities)
-    {
-        foreach (var entity in entities)
+        foreach (var entity in addedEntities)
         {
             if (entity.CreatedAt == DateTime.MinValue)
-                entity.CreatedAt = DateTime.UtcNow.ToUniversalTime();
+                entity.CreatedAt = now;
+            entity.UpdatedAt = now;
         }
     }
 }

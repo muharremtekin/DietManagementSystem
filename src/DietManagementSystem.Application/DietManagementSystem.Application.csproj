@@ -7,11 +7,20 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="DTOs\" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.11.0" />
+    <PackageReference Include="MediatR" Version="12.5.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.7.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\DietManagementSystem.Domain\DietManagementSystem.Domain.csproj" />
+	<ProjectReference Include="..\DietManagementSystem.Persistence\DietManagementSystem.Persistence.csproj" />
+
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Features\Base\" />
+    <Folder Include="Features\Meal\Queries\" />
   </ItemGroup>
 
 </Project>

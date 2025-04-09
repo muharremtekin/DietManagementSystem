@@ -8,12 +8,28 @@ public class ApplicationUserConfiguration : IEntityTypeConfiguration<Application
 {
     public void Configure(EntityTypeBuilder<ApplicationUser> builder)
     {
-        // Tablo adı
+        // Tablo adını "Users" olarak ayarlıyoruz.
         builder.ToTable("Users");
 
-        // Alan yapılandırmaları
+        // FullName alanı için maksimum uzunluk belirleniyor.
         builder.Property(u => u.FullName)
-            .IsRequired()
-            .HasMaxLength(100);
+            .HasMaxLength(150);
+
+        // DietPlansAsDietitian ilişkisi: Bir diyetisyen, birden fazla diyet planı oluşturabilir.
+        builder.HasMany(u => u.DietPlansAsDietitian)
+            .WithOne(dp => dp.Dietitian)
+            .HasForeignKey(dp => dp.DietitianId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        builder.HasMany(u => u.DietPlansAsClient)
+            .WithOne(dp => dp.Client)
+            .HasForeignKey(dp => dp.ClientId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        // ProgressEntries ilişkisi: Danışanın ilerleme kayıtları.
+        builder.HasMany(u => u.ProgressEntries)
+            .WithOne(p => p.Client)
+            .HasForeignKey(p => p.ClientId)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

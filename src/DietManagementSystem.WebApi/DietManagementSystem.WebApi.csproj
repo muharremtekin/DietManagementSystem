@@ -7,12 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.14" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\DietManagementSystem.Application\DietManagementSystem.Application.csproj" />
-    <ProjectReference Include="..\DietManagementSystem.Infrastructure\DietManagementSystem.Infrastructure.csproj" />
+    <ProjectReference Include="..\DietManagementSystem.Common\DietManagementSystem.Common.csproj" />
+    <ProjectReference Include="..\DietManagementSystem.Persistence\DietManagementSystem.Persistence.csproj" />
   </ItemGroup>
 
 </Project>
