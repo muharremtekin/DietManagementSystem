@@ -1,0 +1,40 @@
+services:
+  dietmanagementsystem.webapi:
+    image: ${DOCKER_REGISTRY-}dietmanagementsystemwebapi
+    container_name: dietmanagementsystem.webapi
+    build:
+      context: .
+      dockerfile: src/DietManagementSystem.WebApi/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_URLS: http://+:8080
+    ports:
+      - 8080:8080
+    depends_on:
+      - postgresql
+    networks:
+      - local-network
+    restart: always
+
+  postgresql:
+    image: postgres:latest
+    container_name: postgresql
+    environment:
+      POSTGRES_USER: dms_admin
+      POSTGRES_PASSWORD: puzvlxFaZHNjPF2U7Wt3FwAasdj54asd8JNBid
+      POSTGRES_DB: DietManagementProductionDb
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - local-network
+    restart: always
+
+volumes:
+  postgres_data:
+  
+networks:
+  local-network:
+    name: local-network
+    driver: bridge
