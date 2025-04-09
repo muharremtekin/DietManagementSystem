@@ -9,11 +9,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DietManagementSystem.Applic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DietManagementSystem.Domain", "src\DietManagementSystem.Domain\DietManagementSystem.Domain.csproj", "{4115ED97-C179-4D4B-A160-D350E376E8EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DietManagementSystem.Infrastructure", "src\DietManagementSystem.Infrastructure\DietManagementSystem.Infrastructure.csproj", "{DC55A195-90A4-47EF-8FDD-D4BD998203CF}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DietManagementSystem.WebApi", "src\DietManagementSystem.WebApi\DietManagementSystem.WebApi.csproj", "{4FD890EB-3474-41FA-9064-5C0C5828188C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DietManagementSystem.Application.Tests", "src\DietManagementSystem.Application.Tests\DietManagementSystem.Application.Tests.csproj", "{342E296C-D700-43CC-8808-8290AE776909}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DietManagementSystem.Persistence", "src\DietManagementSystem.Persistence\DietManagementSystem.Persistence.csproj", "{76644A89-7B4B-41D0-9BDE-0C5801D18192}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DietManagementSystem.Common", "src\DietManagementSystem.Common\DietManagementSystem.Common.csproj", "{F30FB7B4-E730-42DC-BBE0-1600A985CC0C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +31,6 @@ Global
 		{4115ED97-C179-4D4B-A160-D350E376E8EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4115ED97-C179-4D4B-A160-D350E376E8EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4115ED97-C179-4D4B-A160-D350E376E8EE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DC55A195-90A4-47EF-8FDD-D4BD998203CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DC55A195-90A4-47EF-8FDD-D4BD998203CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DC55A195-90A4-47EF-8FDD-D4BD998203CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DC55A195-90A4-47EF-8FDD-D4BD998203CF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4FD890EB-3474-41FA-9064-5C0C5828188C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4FD890EB-3474-41FA-9064-5C0C5828188C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4FD890EB-3474-41FA-9064-5C0C5828188C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -41,6 +39,14 @@ Global
 		{342E296C-D700-43CC-8808-8290AE776909}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{342E296C-D700-43CC-8808-8290AE776909}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{342E296C-D700-43CC-8808-8290AE776909}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76644A89-7B4B-41D0-9BDE-0C5801D18192}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76644A89-7B4B-41D0-9BDE-0C5801D18192}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76644A89-7B4B-41D0-9BDE-0C5801D18192}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76644A89-7B4B-41D0-9BDE-0C5801D18192}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F30FB7B4-E730-42DC-BBE0-1600A985CC0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F30FB7B4-E730-42DC-BBE0-1600A985CC0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F30FB7B4-E730-42DC-BBE0-1600A985CC0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F30FB7B4-E730-42DC-BBE0-1600A985CC0C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,8 +54,9 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{D4A75AF5-0C07-4387-9CD3-069B2C3C4890} = {D263ED0E-F635-421F-8D2E-1C7058D345D5}
 		{4115ED97-C179-4D4B-A160-D350E376E8EE} = {D263ED0E-F635-421F-8D2E-1C7058D345D5}
-		{DC55A195-90A4-47EF-8FDD-D4BD998203CF} = {D263ED0E-F635-421F-8D2E-1C7058D345D5}
 		{4FD890EB-3474-41FA-9064-5C0C5828188C} = {D263ED0E-F635-421F-8D2E-1C7058D345D5}
 		{342E296C-D700-43CC-8808-8290AE776909} = {D263ED0E-F635-421F-8D2E-1C7058D345D5}
+		{76644A89-7B4B-41D0-9BDE-0C5801D18192} = {D263ED0E-F635-421F-8D2E-1C7058D345D5}
+		{F30FB7B4-E730-42DC-BBE0-1600A985CC0C} = {D263ED0E-F635-421F-8D2E-1C7058D345D5}
 	EndGlobalSection
 EndGlobal
