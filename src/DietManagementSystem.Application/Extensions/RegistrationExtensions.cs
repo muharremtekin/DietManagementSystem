@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using DietManagementSystem.Application.Validators;
+using FluentValidation;
+using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
 namespace DietManagementSystem.Application.Extensions;
@@ -13,7 +16,10 @@ public static class RegistrationExtensions
             cfg.RegisterServicesFromAssemblies(assembly);
         });
 
+        services.AddValidatorsFromAssemblyContaining<LoginUserCommandValidator>();
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
         return services;
     }
-}
 
+
+}
