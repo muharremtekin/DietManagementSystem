@@ -6,9 +6,12 @@ using DietManagementSystem.Application.Features.Progress.Queries.GetProgressQuer
 using DietManagementSystem.Common.Constants;
 using DietManagementSystem.WebApi.Controllers.Base;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DietManagementSystem.WebApi.Controllers;
+
+[Authorize(Policy = "DietitianPolicy")]
 [Route(RouteConstants.progress)]
 [ApiController]
 public class ProgressController : BaseController

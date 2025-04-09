@@ -6,9 +6,12 @@ using DietManagementSystem.Application.Features.User.Queries.GetUsers;
 using DietManagementSystem.Common.Constants;
 using DietManagementSystem.WebApi.Controllers.Base;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DietManagementSystem.WebApi.Controllers;
+
+[Authorize(Policy = "AdminPolicy")]
 [Route(RouteConstants.admin)]
 [ApiController]
 public class AdminController : BaseController
@@ -20,17 +23,8 @@ public class AdminController : BaseController
     [HttpGet("{userId}")]
     public async Task<IActionResult> GetOne([FromRoute] Guid userId)
     {
-        try
-        {
-            var result = await _mediator.Send(new GetUserByIdQuery(userId));
-            return Ok(result);
-        }
-        catch (Exception)
-        {
-
-            throw;
-        }
-
+        var result = await _mediator.Send(new GetUserByIdQuery(userId));
+        return Ok(result);
     }
 
     [HttpGet]

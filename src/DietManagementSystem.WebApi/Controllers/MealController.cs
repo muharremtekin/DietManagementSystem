@@ -5,11 +5,13 @@ using DietManagementSystem.Application.Features.Meal.Queries.GetAllMeals;
 using DietManagementSystem.Application.Features.Meal.Queries.GetMealQuery;
 using DietManagementSystem.WebApi.Controllers.Base;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DietManagementSystem.WebApi.Controllers
 {
+    [Authorize(Policy = "DietitianPolicy")]
     [Route("api/meals")]
     [ApiController]
     public class MealController : BaseController

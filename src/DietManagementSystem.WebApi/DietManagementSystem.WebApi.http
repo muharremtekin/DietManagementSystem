@@ -1,6 +1,233 @@
 @DietManagementSystem.WebApi_HostAddress = http://localhost:5042
 
-GET {{DietManagementSystem.WebApi_HostAddress}}/weatherforecast/
+# Admin Endpoints
+POST {{DietManagementSystem.WebApi_HostAddress}}/api/admin
+Content-Type: application/json
+
+{
+  "firstName": "string",
+  "lastName": "string",
+  "email": "string",
+  "password": "string"
+}
+
+###
+
+GET {{DietManagementSystem.WebApi_HostAddress}}/api/admin
 Accept: application/json
+
+###
+
+GET {{DietManagementSystem.WebApi_HostAddress}}/api/admin/{userId}
+Accept: application/json
+
+###
+
+PUT {{DietManagementSystem.WebApi_HostAddress}}/api/admin/{userId}
+Content-Type: application/json
+
+{
+  "firstName": "string", 
+  "lastName": "string",
+  "email": "string"
+}
+
+###
+
+DELETE {{DietManagementSystem.WebApi_HostAddress}}/api/admin/{userId}
+
+###
+
+# Dietitian Endpoints
+POST {{DietManagementSystem.WebApi_HostAddress}}/api/dietitian
+Content-Type: application/json
+
+{
+  "firstName": "string",
+  "lastName": "string", 
+  "email": "string",
+  "password": "string"
+}
+
+###
+
+GET {{DietManagementSystem.WebApi_HostAddress}}/api/dietitian
+Accept: application/json
+
+###
+
+GET {{DietManagementSystem.WebApi_HostAddress}}/api/dietitian/{userId}
+Accept: application/json
+
+###
+
+PUT {{DietManagementSystem.WebApi_HostAddress}}/api/dietitian/{userId}
+Content-Type: application/json
+
+{
+  "firstName": "string",
+  "lastName": "string",
+  "email": "string"
+}
+
+###
+
+DELETE {{DietManagementSystem.WebApi_HostAddress}}/api/dietitian/{userId}
+
+###
+
+# Client Endpoints
+POST {{DietManagementSystem.WebApi_HostAddress}}/api/client
+Content-Type: application/json
+
+{
+  "firstName": "string",
+  "lastName": "string",
+  "email": "string",
+  "password": "string"
+}
+
+###
+
+GET {{DietManagementSystem.WebApi_HostAddress}}/api/client
+Accept: application/json
+
+###
+
+GET {{DietManagementSystem.WebApi_HostAddress}}/api/client/{userId}
+Accept: application/json
+
+###
+
+PUT {{DietManagementSystem.WebApi_HostAddress}}/api/client/{userId}
+Content-Type: application/json
+
+{
+  "firstName": "string",
+  "lastName": "string",
+  "email": "string"
+}
+
+###
+
+DELETE {{DietManagementSystem.WebApi_HostAddress}}/api/client/{userId}
+
+###
+
+# Diet Plan Endpoints
+POST {{DietManagementSystem.WebApi_HostAddress}}/api/diet-plans
+Content-Type: application/json
+
+{
+  "clientId": "string",
+  "startDate": "2024-01-01",
+  "endDate": "2024-02-01",
+  "goal": "string",
+  "notes": "string"
+}
+
+###
+
+GET {{DietManagementSystem.WebApi_HostAddress}}/api/diet-plans
+Accept: application/json
+
+###
+
+GET {{DietManagementSystem.WebApi_HostAddress}}/api/diet-plans/{dietitianId}
+Accept: application/json
+
+###
+
+PUT {{DietManagementSystem.WebApi_HostAddress}}/api/diet-plans/{id}
+Content-Type: application/json
+
+{
+  "goal": "string",
+  "notes": "string"
+}
+
+###
+
+DELETE {{DietManagementSystem.WebApi_HostAddress}}/api/diet-plans/{id}
+
+###
+
+# Meal Endpoints
+POST {{DietManagementSystem.WebApi_HostAddress}}/api/meals
+Content-Type: application/json
+
+{
+  "name": "string",
+  "description": "string",
+  "calories": 0,
+  "protein": 0,
+  "carbohydrates": 0,
+  "fat": 0
+}
+
+###
+
+GET {{DietManagementSystem.WebApi_HostAddress}}/api/meals
+Accept: application/json
+
+###
+
+GET {{DietManagementSystem.WebApi_HostAddress}}/api/meals/{id}
+Accept: application/json
+
+###
+
+PUT {{DietManagementSystem.WebApi_HostAddress}}/api/meals/{id}
+Content-Type: application/json
+
+{
+  "name": "string",
+  "description": "string",
+  "calories": 0,
+  "protein": 0,
+  "carbohydrates": 0,
+  "fat": 0
+}
+
+###
+
+DELETE {{DietManagementSystem.WebApi_HostAddress}}/api/meals/{id}
+
+###
+
+# Progress Endpoints
+POST {{DietManagementSystem.WebApi_HostAddress}}/api/progress
+Content-Type: application/json
+
+{
+  "dietPlanId": "string",
+  "date": "2024-01-01",
+  "weight": 0,
+  "notes": "string"
+}
+
+###
+
+GET {{DietManagementSystem.WebApi_HostAddress}}/api/progress?dietPlanId={dietPlanId}
+Accept: application/json
+
+###
+
+GET {{DietManagementSystem.WebApi_HostAddress}}/api/progress/{id}
+Accept: application/json
+
+###
+
+PUT {{DietManagementSystem.WebApi_HostAddress}}/api/progress/{id}
+Content-Type: application/json
+
+{
+  "weight": 0,
+  "notes": "string"
+}
+
+###
+
+DELETE {{DietManagementSystem.WebApi_HostAddress}}/api/progress/{id}
 
 ###
