@@ -22,6 +22,7 @@ public static class Registrations
 
         services.AddScoped<IDietPlanRepository, DietPlanRepository>();
         services.AddScoped<IMealRepository, MealRepository>();
+        services.AddScoped<IProgressRepository, ProgressRepository>();
 
         return services;
     }
@@ -56,7 +57,23 @@ public static class Registrations
             };
         });
 
-        services.AddAuthorization();
+        services.AddAuthorization(options =>
+        {
+            options.AddPolicy("AdminPolicy", policy =>
+                policy.RequireRole("Admin"));
+
+            options.AddPolicy("DietitianPolicy", policy =>
+                policy.RequireRole("Dietitian", "Admin"));
+
+            options.AddPolicy("ManageClients", policy =>
+                policy.RequireRole("Admin", "Dietitian"));
+
+            options.AddPolicy("ManageDietPlans", policy =>
+                policy.RequireRole("Admin", "Dietitian"));
+
+            options.AddPolicy("ManageDietitians", policy =>
+                policy.RequireRole("Admin"));
+        });
 
         return services;
     }

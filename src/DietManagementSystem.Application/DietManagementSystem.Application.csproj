@@ -21,6 +21,8 @@
   <ItemGroup>
     <Folder Include="Features\Base\" />
     <Folder Include="Features\Meal\Queries\" />
+    <Folder Include="Validators\Meal\" />
+    <Folder Include="Validators\Progress\" />
   </ItemGroup>
 
 </Project>

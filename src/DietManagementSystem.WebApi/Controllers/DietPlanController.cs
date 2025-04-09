@@ -5,9 +5,12 @@ using DietManagementSystem.Application.Features.DietPlan.Queries.GetAllDietPlans
 using DietManagementSystem.Application.Features.DietPlan.Queries.GetDietPlanQuery;
 using DietManagementSystem.WebApi.Controllers.Base;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DietManagementSystem.WebApi.Controllers;
+
+[Authorize(Policy = "ManageDietPlans")]
 [Route("api/diet-plans")]
 [ApiController]
 public class DietPlanController : BaseController
@@ -16,7 +19,7 @@ public class DietPlanController : BaseController
     {
     }
 
-    //[Authorize]
+
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateDietPlanCommmand command)
     {
@@ -24,7 +27,7 @@ public class DietPlanController : BaseController
         await _mediator.Send(command);
         return Created();
     }
-    //[Authorize]
+
     [HttpGet("{dietitianId}")]
     public async Task<IActionResult> GetOne([FromRoute] Guid dietitianId)
     {
@@ -32,7 +35,6 @@ public class DietPlanController : BaseController
         return Ok(result);
     }
 
-    //[Authorize]
     [HttpGet]
     public async Task<IActionResult> GetAll([FromQuery] GetAllDietPlansQueryParams queryParams)
     {

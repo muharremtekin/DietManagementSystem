@@ -22,15 +22,14 @@ public class LoginUserCommandHandler : IRequestHandler<LoginUserCommand, LoginUs
     }
     public async Task<LoginUserDto> Handle(LoginUserCommand request, CancellationToken cancellationToken)
     {
-        ApplicationUser user = null;
+        ApplicationUser? user = null;
         if (!string.IsNullOrEmpty(request.userName))
-        {
             user = await _userManager.FindByNameAsync(request.userName);
-        }
+
         else if (!string.IsNullOrEmpty(request.email))
-        {
             user = await _userManager.FindByEmailAsync(request.email);
-        }
+
+        var test = await _userManager.FindByEmailAsync("musteri@gmail.com");
 
         var exception = new BadRequestException("Kullanıcı adı veya şifre hatalı.");
         if (user == null) throw exception;
