@@ -1,4 +1,5 @@
 ﻿using DietManagementSystem.Application.Exceptions;
+using FluentValidation;
 using Microsoft.AspNetCore.Diagnostics;
 using System.Net;
 
@@ -19,20 +20,30 @@ public static class ExceptionMiddlewareExtensions
                 if (contextFeature != null)
                 {
 
-                    context.Response.StatusCode = contextFeature.Error switch
+                    var errorDetail = new ErrorDetail
                     {
-                        NotFoundException => StatusCodes.Status404NotFound,
-                        ForbiddenException => StatusCodes.Status403Forbidden,
-                        BadRequestException => StatusCodes.Status400BadRequest,
-                        _ => StatusCodes.Status500InternalServerError,
+                        StatusCode = contextFeature.Error switch
+                        {
+                            NotFoundException => StatusCodes.Status404NotFound,
+                            ForbiddenException => StatusCodes.Status403Forbidden,
+                            BadRequestException => StatusCodes.Status400BadRequest,
+                            ValidationException validationEx => StatusCodes.Status400BadRequest,
+                            _ => StatusCodes.Status500InternalServerError
+                        },
+                        Message = contextFeature.Error.Message
                     };
 
 
-                    await context.Response.WriteAsync(new ErrorDetail()
+                    context.Response.StatusCode = errorDetail.StatusCode;
+
+                    // ValidationException için özel hata listesi
+                    if (contextFeature.Error is ValidationException validationException)
                     {
-                        StatusCode = context.Response.StatusCode,
-                        Message = contextFeature.Error.Message
-                    }.ToString());
+                        errorDetail.Message = "Doğrulama hatası oluştu.";
+                        errorDetail.Errors = validationException.Errors.Select(e => e.ErrorMessage).ToList();
+                    }
+
+                    await context.Response.WriteAsync(errorDetail.ToString());
                 }
             });
         });
