@@ -1,6 +1,6 @@
-﻿using DietManagementSystem.Application.Interfaces.Repositories;
-using DietManagementSystem.Domain.Entities;
+﻿using DietManagementSystem.Domain.Entities;
 using DietManagementSystem.Persistence.Context;
+using DietManagementSystem.Persistence.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
@@ -33,6 +33,19 @@ public abstract class EntityRepository<TEntity> : IEntityRepository<TEntity> whe
         this.entity.Remove(entity);
     }
 
+    /// <summary>
+    /// Retrieves a list of entities that match the specified predicate.
+    /// </summary>
+    /// <param name="predicate">A function to filter the entities.</param>
+    /// <param name="noTracking">A boolean indicating whether to track the entities or not (default is true).</param>
+    /// <param name="orderBy">An optional function to order the results.</param>
+    /// <param name="includes">An optional array of expressions to include related entities.</param>
+    /// <returns>A task that represents the asynchronous operation, containing a list of entities of type <typeparamref name="TEntity"/>.</returns>
+    /// <example>
+    /// <code>
+    /// var dietPlans = await repository.GetList(dp => dp.ClientId == clientId);
+    /// </code>
+    /// </example>
     public async Task<List<TEntity>> GetList(Expression<Func<TEntity, bool>> predicate, bool noTracking = true, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, params Expression<Func<TEntity, object>>[] includes)
     {
         IQueryable<TEntity> query = entity;
@@ -52,11 +65,32 @@ public abstract class EntityRepository<TEntity> : IEntityRepository<TEntity> whe
         return await query.ToListAsync();
     }
 
+    /// <summary>
+    /// Retrieves a collection of entities that match the specified predicate.
+    /// </summary>
+    /// <typeparam name="TCollection">The type of the collection to return.</typeparam>
+    /// <param name="predicate">A function to filter the entities.</param>
+    /// <param name="collectionSelector">A function that takes an <see cref="IQueryable{TEntity}"/> and returns a <see cref="Task{TCollection}"/>.</param>
+    /// <param name="noTracking">A boolean indicating whether to track the entities or not (default is true).</param>
+    /// <param name="orderBy">An optional function to order the results.</param>
+    /// <param name="includes">An optional array of expressions to include related entities.</param>
+    /// <returns>A task that represents the asynchronous operation, containing the collection of entities of type <typeparamref name="TCollection"/>.</returns>
+    /// <example>
+    /// <code>
+    /// var dietPlans = await repository.GetCollection<List<DietPlan>>(
+    ///     dp => dp.ClientId == clientId,
+    ///     query => query.ToListAsync(), // you can youse select and other LINQ methods here
+    ///     noTracking: true,
+    ///     orderBy: q => q.OrderBy(dp => dp.StartDate),
+    ///     includes: new Expression<Func<DietPlan, object>>[] { dp => dp.Meals });
+    /// </code>
+    /// </example>
     public async Task<TCollection> GetCollection<TCollection>(Expression<Func<TEntity, bool>> predicate,
-                                                            Func<IQueryable<TEntity>, Task<TCollection>> collectionSelector,
-                                                            bool noTracking = true,
-                                                            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
-                                                            params Expression<Func<TEntity, object>>[] includes)
+
+                                                                Func<IQueryable<TEntity>, Task<TCollection>> collectionSelector,
+                                                                bool noTracking = true,
+                                                                Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
+                                                                params Expression<Func<TEntity, object>>[] includes)
     {
         IQueryable<TEntity> query = entity;
 

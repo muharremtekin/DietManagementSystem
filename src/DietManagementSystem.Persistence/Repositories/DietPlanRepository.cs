@@ -1,6 +1,6 @@
-﻿using DietManagementSystem.Application.Interfaces.Repositories;
-using DietManagementSystem.Domain.Entities;
+﻿using DietManagementSystem.Domain.Entities;
 using DietManagementSystem.Persistence.Context;
+using DietManagementSystem.Persistence.Interfaces.Repositories;
 
 namespace DietManagementSystem.Persistence.Repositories;
 

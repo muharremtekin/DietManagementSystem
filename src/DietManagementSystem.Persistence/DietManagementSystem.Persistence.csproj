@@ -20,11 +20,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DietManagementSystem.Application\DietManagementSystem.Application.csproj" />
     <ProjectReference Include="..\DietManagementSystem.Domain\DietManagementSystem.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Extensions\" />
     <Folder Include="Migrations\" />
   </ItemGroup>
 
