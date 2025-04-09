@@ -5,8 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DietManagementSystem.WebApi.Controllers;
 
-[Route("api/authentication")]
 [ApiController]
+[Route("api/v{version:apiVersion}/authentication")]
+[ApiVersion("1.0")]
 public class AuthenticationController : BaseController
 {
     public AuthenticationController(IMediator mediator) : base(mediator)

@@ -77,5 +77,31 @@ public static class Registrations
 
         return services;
     }
+
+    public static IServiceCollection ConfigureSwagger(this IServiceCollection services)
+    {
+        services.AddSwaggerGen(c =>
+        {
+            c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Diet Management System API", Version = "v1" });
+            c.CustomSchemaIds(type => type.FullName);
+        });
+        return services;
+    }
+
+    public static IServiceCollection ConfigureCORS(this IServiceCollection services)
+    {
+        services.AddCors(options =>
+        {
+            options.AddPolicy("AllowAllOrigins",
+                builder =>
+                {
+                    builder.AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader();
+                });
+        });
+        return services;
+    }
+
 }
 
