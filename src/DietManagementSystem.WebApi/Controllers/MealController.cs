@@ -6,7 +6,6 @@ using DietManagementSystem.Application.Features.Meal.Queries.GetMealQuery;
 using DietManagementSystem.WebApi.Controllers.Base;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DietManagementSystem.WebApi.Controllers
@@ -28,9 +27,8 @@ namespace DietManagementSystem.WebApi.Controllers
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetOne([FromRoute] Guid id)
-        {
-            return Ok(await _mediator.Send(new GetMealQuery(id)));
-        }
+            => Ok(await _mediator.Send(new GetMealQuery(id)));
+
 
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateMealCommand command)

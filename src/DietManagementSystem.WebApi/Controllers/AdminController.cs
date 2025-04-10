@@ -5,13 +5,13 @@ using DietManagementSystem.Application.Features.User.Queries.GetUserById;
 using DietManagementSystem.Application.Features.User.Queries.GetUsers;
 using DietManagementSystem.Common.Constants;
 using DietManagementSystem.WebApi.Controllers.Base;
+using DietManagementSystem.WebApi.Extensions;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DietManagementSystem.WebApi.Controllers;
 
-[Authorize(Policy = "AdminPolicy")]
+//[Authorize(Policy = "AdminPolicy")]
 [Route(RouteConstants.admin)]
 [ApiController]
 public class AdminController : BaseController
@@ -28,9 +28,11 @@ public class AdminController : BaseController
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAll()
+    public async Task<IActionResult> GetAll([FromQuery] GetAllUsersQuery query)
     {
-        var result = await _mediator.Send(new GetUsersQuery(RoleConstants.Admin));
+        query.Role = RoleConstants.Admin;
+        var result = await _mediator.Send(query);
+        Response.AddPaginationHeader(result.MetaData);
         return Ok(result);
     }
 

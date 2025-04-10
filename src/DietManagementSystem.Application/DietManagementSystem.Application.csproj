@@ -9,10 +9,12 @@
   <ItemGroup>
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.11.0" />
     <PackageReference Include="MediatR" Version="12.5.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.3.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.7.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DietManagementSystem.Common\DietManagementSystem.Common.csproj" />
     <ProjectReference Include="..\DietManagementSystem.Domain\DietManagementSystem.Domain.csproj" />
 	<ProjectReference Include="..\DietManagementSystem.Persistence\DietManagementSystem.Persistence.csproj" />
 

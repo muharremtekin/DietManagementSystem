@@ -29,6 +29,8 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand>
             user.PasswordHash = passwordHash;
         }
 
-        await _userManager.UpdateAsync(user);
+        var result = await _userManager.UpdateAsync(user);
+        if (!result.Succeeded)
+            throw new BadRequestException($"Failed to update user: {string.Join(", ", result.Errors.Select(e => e.Description))}");
     }
 }

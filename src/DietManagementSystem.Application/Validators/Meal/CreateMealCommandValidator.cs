@@ -23,6 +23,7 @@ public class CreateMealCommandValidator : AbstractValidator<CreateMealCommand>
             .GreaterThan(x => x.StartTime).WithMessage("Bitiş saati başlangıç saatinden sonra olmalıdır.");
 
         RuleFor(x => x.Content)
-            .NotEmpty().WithMessage("İçerik zorunludur.");
+            .NotEmpty().WithMessage("İçerik zorunludur.")
+            .MaximumLength(500).WithMessage("İçerik en fazla 500 karakter olabilir.");
     }
 } 

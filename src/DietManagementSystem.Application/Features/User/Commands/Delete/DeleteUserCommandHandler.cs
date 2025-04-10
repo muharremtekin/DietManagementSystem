@@ -16,7 +16,10 @@ public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand>
     {
         var user = await _userManager.FindByIdAsync(request.userId.ToString());
         if (user == null) throw new NotFoundException("User not found.");
+        
         user.IsDeleted = true;
-        await _userManager.UpdateAsync(user);
+        var result = await _userManager.UpdateAsync(user);
+        if (!result.Succeeded)
+            throw new BadRequestException($"Failed to update user: {string.Join(", ", result.Errors.Select(e => e.Description))}");
     }
 }

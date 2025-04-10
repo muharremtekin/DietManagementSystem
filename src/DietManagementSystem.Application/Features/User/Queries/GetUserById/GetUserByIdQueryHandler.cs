@@ -19,9 +19,7 @@ public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, UserVie
     {
         var user = await _userManager.FindByIdAsync(request.UserId.ToString());
 
-        if (user == null) throw new NotFoundException("User not found.");
-
-        var roles = await _userManager.GetRolesAsync(user);
+        if (user == null || user.IsDeleted) throw new NotFoundException("User not found.");
 
         return new UserViewModel(user.Id, user.DateOfBirth, user.FullName, user.Email, user.UserName);
     }

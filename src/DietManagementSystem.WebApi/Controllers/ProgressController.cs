@@ -28,9 +28,9 @@ public class ProgressController : BaseController
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAllProgress([FromQuery] Guid dietPlanId)
+    public async Task<IActionResult> GetAllProgress([FromQuery] GetAllProgressQuery query)
     {
-        var progress = await _mediator.Send(new GetAllProgressQuery(dietPlanId));
+        var progress = await _mediator.Send(query);
         return Ok(progress);
     }
 
