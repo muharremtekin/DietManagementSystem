@@ -1,9 +1,7 @@
 using DietManagementSystem.Application.Exceptions;
 using DietManagementSystem.Application.Features.Meal.Commands.Create;
-using DietManagementSystem.Domain.Entities;
 using DietManagementSystem.Persistence.Interfaces.Repositories;
 using Moq;
-using NUnit.Framework;
 
 namespace DietManagementSystem.Application.Tests.Features.Meal.Commands.Create;
 
@@ -27,9 +25,9 @@ public class CreateMealCommandHandlerTests
     {
         // Arrange
         var dietPlanId = Guid.NewGuid();
-        var startTime = new TimeSpan(8, 0, 0); // 8:00 AM
-        var endTime = new TimeSpan(9, 0, 0);   // 9:00 AM
-        
+        var startTime = new DateTime(1, 1, 1, 8, 0, 0); // 8:00 AM
+        var endTime = new DateTime(1, 1, 1, 9, 0, 0);   // 9:00 AM
+
         var command = new CreateMealCommand(
             dietPlanId,
             "Breakfast",
@@ -60,8 +58,8 @@ public class CreateMealCommandHandlerTests
         // Assert
         _mealRepositoryMock.Verify(x => x.AddAsync(It.Is<Domain.Entities.Meal>(m =>
             m.Title == command.Title &&
-            m.StartTime == command.StartTime &&
-            m.EndTime == command.EndTime &&
+            m.StartTime == command.StartTime.TimeOfDay &&
+            m.EndTime == command.EndTime.TimeOfDay &&
             m.Content == command.Content &&
             m.DietPlanId == command.DietPlanId)), Times.Once);
 
@@ -73,9 +71,9 @@ public class CreateMealCommandHandlerTests
     {
         // Arrange
         var dietPlanId = Guid.NewGuid();
-        var startTime = new TimeSpan(8, 0, 0);
-        var endTime = new TimeSpan(9, 0, 0);
-        
+        var startTime = new DateTime(1, 1, 1, 8, 0, 0); // 8:00 AM
+        var endTime = new DateTime(1, 1, 1, 9, 0, 0);   // 9:00 AM
+
         var command = new CreateMealCommand(
             dietPlanId,
             "Breakfast",
@@ -96,4 +94,4 @@ public class CreateMealCommandHandlerTests
         _mealRepositoryMock.Verify(x => x.AddAsync(It.IsAny<Domain.Entities.Meal>()), Times.Never);
         _mealRepositoryMock.Verify(x => x.SaveChangesAsync(), Times.Never);
     }
-} 
+}
