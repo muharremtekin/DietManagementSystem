@@ -17,7 +17,7 @@ public class CreateMealCommandHandler : IRequestHandler<CreateMealCommand>
 
     public async Task Handle(CreateMealCommand request, CancellationToken cancellationToken)
     {
-        var dietPlan = _dietPlanRepository.GetSingleAsync(x => x.Id == request.DietPlanId);
+        var dietPlan = await _dietPlanRepository.GetSingleAsync(x => x.Id == request.DietPlanId);
 
         if (dietPlan is null)
             throw new NotFoundException("Diet plan not found.");
