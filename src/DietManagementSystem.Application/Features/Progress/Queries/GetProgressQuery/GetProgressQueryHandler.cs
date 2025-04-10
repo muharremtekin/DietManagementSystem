@@ -13,7 +13,7 @@ public class GetProgressQueryHandler : IRequestHandler<GetProgressQuery, Progres
 
     public async Task<ProgressViewModel> Handle(GetProgressQuery request, CancellationToken cancellationToken)
     {
-        var progress = await _progressRepository.GetSingleAsync(p => p.Id == request.Id);
+        var progress = await _progressRepository.GetSingleAsync(p => p.Id == request.Id, true);
 
         if (progress == null) throw new NotFoundException("Progress not found.");
 

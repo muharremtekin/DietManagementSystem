@@ -5,6 +5,7 @@ using DietManagementSystem.Application.Features.User.Queries.GetUserById;
 using DietManagementSystem.Application.Features.User.Queries.GetUsers;
 using DietManagementSystem.Common.Constants;
 using DietManagementSystem.WebApi.Controllers.Base;
+using DietManagementSystem.WebApi.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -29,9 +30,11 @@ namespace DietManagementSystem.WebApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] GetAllUsersQuery query)
         {
-            var result = await _mediator.Send(new GetUsersQuery(RoleConstants.Dietitian));
+            query.Role = RoleConstants.Dietitian;
+            var result = await _mediator.Send(query);
+            Response.AddPaginationHeader(result.MetaData);
             return Ok(result);
         }
 

@@ -25,8 +25,8 @@ public class CreateMealCommandHandler : IRequestHandler<CreateMealCommand>
         var meal = new Domain.Entities.Meal
         {
             Title = request.Title,
-            StartTime = request.StartTime,
-            EndTime = request.EndTime,
+            StartTime = request.StartTime.TimeOfDay,
+            EndTime = request.EndTime.TimeOfDay,
             Content = request.Content,
             DietPlanId = request.DietPlanId
         };

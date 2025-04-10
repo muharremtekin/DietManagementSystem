@@ -36,9 +36,11 @@ public class DietPlanController : BaseController
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAll([FromQuery] GetAllDietPlansQueryParams queryParams)
+    public async Task<IActionResult> GetAll([FromQuery] GetAllDietPlansQuery query)
     {
-        var query = new GetAllDietPlansQuery(queryParams, (UserId, UserRole));
+        // giriş yapan kullanıcıya göre çeşitli business kuralları işletilebilir
+        // fakat case study için bu kadarı yeterli
+        query.RequesterInfo = (UserId, UserRole);
         var result = await _mediator.Send(query);
         return Ok(result);
     }

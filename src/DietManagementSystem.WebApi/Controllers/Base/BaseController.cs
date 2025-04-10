@@ -12,7 +12,6 @@ public abstract class BaseController : ControllerBase
         get
         {
             var val = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-
             return val is null ? null : new Guid(val);
         }
     }
