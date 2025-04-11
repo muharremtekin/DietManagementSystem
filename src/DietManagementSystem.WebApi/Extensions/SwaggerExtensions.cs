@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using System.Reflection;
 
 namespace DietManagementSystem.WebApi.Extensions;
 
@@ -24,14 +25,24 @@ public class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOptions>
                 {
                     Title = $"Diet Management System API {description.ApiVersion}",
                     Version = description.ApiVersion.ToString(),
-                    Description = "A comprehensive diet management system API",
+                    Description = "A comprehensive diet management system API that allows dietitians to manage clients, create diet plans, track progress, and manage meals.",
                     Contact = new OpenApiContact
                     {
-                        Name = "Your Name",
-                        Email = "your.email@example.com"
+                        Name = "Diet Management System Team",
+                        Email = "support@dietmanagement.com"
+                    },
+                    License = new OpenApiLicense
+                    {
+                        Name = "MIT License",
+                        Url = new Uri("https://opensource.org/licenses/MIT")
                     }
                 });
         }
+
+        // Include XML comments
+        var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+        var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+        options.IncludeXmlComments(xmlPath);
     }
 }
 
@@ -43,7 +54,7 @@ public static class SwaggerExtensions
         services.AddSwaggerGen(options =>
         {
             options.OperationFilter<SwaggerDefaultValues>();
-            
+
             // Add JWT Authentication support in Swagger
             options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
             {
@@ -84,6 +95,13 @@ public static class SwaggerExtensions
                     $"/swagger/{description.GroupName}/swagger.json",
                     description.GroupName.ToUpperInvariant());
             }
+
+            options.DocumentTitle = "Diet Management System API Documentation";
+            options.DefaultModelsExpandDepth(2);
+            options.DefaultModelRendering(Swashbuckle.AspNetCore.SwaggerUI.ModelRendering.Model);
+            options.DocExpansion(Swashbuckle.AspNetCore.SwaggerUI.DocExpansion.None);
+            options.EnableDeepLinking();
+            options.DisplayOperationId();
         });
 
         return app;
@@ -120,4 +138,4 @@ public class SwaggerDefaultValues : IOperationFilter
             parameter.Required |= description.IsRequired;
         }
     }
-} 
+}
