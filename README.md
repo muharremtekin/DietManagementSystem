@@ -49,10 +49,6 @@ A comprehensive diet management system built with .NET 8, designed to help dieti
   - Ingredient management
   - Portion control
   - Meal timing scheduling
-- **Meal Categories**
-  - Breakfast, lunch, dinner
-  - Snacks and supplements
-  - Special dietary requirements
 
 ### Progress Tracking
 - **Comprehensive Monitoring**
@@ -278,35 +274,12 @@ DietManagementSystem/
      brew services start postgresql@14
      ```
 
-
-### Test Categories
-- **Unit Tests**: `[Fact]` attribute
-- **Integration Tests**: `[Trait("Category", "Integration")]` attribute
-- **Database Tests**: `[Trait("Category", "Database")]` attribute
-
-To run specific categories:
-```bash
-# Run only integration tests
-dotnet test --filter "Category=Integration"
-
-# Run only database tests
-dotnet test --filter "Category=Database"
-```
-
-
 ## 🔒 Security
 
 ### Authentication
 - JWT-based authentication
 - Secure password hashing
 - Role-based authorization
-
-### Data Protection
-- Input validation
-- SQL injection prevention
-- XSS protection
-- CORS policy
-- HTTPS enforcement
 
 ### Best Practices
 - Secure headers
