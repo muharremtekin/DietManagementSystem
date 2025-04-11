@@ -7,11 +7,12 @@ using DietManagementSystem.Common.Constants;
 using DietManagementSystem.WebApi.Controllers.Base;
 using DietManagementSystem.WebApi.Extensions;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DietManagementSystem.WebApi.Controllers;
 
-//[Authorize(Policy = "AdminPolicy")]
+[Authorize(Policy = "AdminPolicy")]
 [Route(RouteConstants.admin)]
 [ApiController]
 public class AdminController : BaseController

@@ -11,12 +11,12 @@ services:
     ports:
       - 8080:8080
     depends_on:
-      - postgresql
+      - dietmanagementsystem.postgresql
     networks:
       - local-network
     restart: always
 
-  postgresql:
+  dietmanagementsystem.postgresql:
     image: postgres:latest
     container_name: dietmanagementsystem.postgresql
     environment:
