@@ -15,6 +15,7 @@ public class AuthenticationControllerV2 : BaseController
     }
 
     /// <summary>
+    /// This is just an example endpoint to show versioning in action
     /// Authenticates a user and returns JWT tokens
     /// </summary>
     /// <param name="command">Login credentials</param>

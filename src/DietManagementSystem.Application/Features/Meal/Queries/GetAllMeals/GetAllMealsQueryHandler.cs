@@ -44,8 +44,8 @@ public class GetAllMealsQueryHandler : IRequestHandler<GetAllMealsQuery, PagedLi
         var meals = query.Select(x => new MealViewModel(x.Id, x.Title, x.StartTime, x.EndTime, x.Content, x.DietPlanId))
                         .ToPagedList(request.PageNumber, request.PageSize);
 #else
-        //var meals = await query.Select(x => new MealViewModel(x.Id, x.Title, x.StartTime, x.EndTime, x.Content, x.DietPlanId))
-        //                        .ToPagedListAsync(request.PageNumber, request.PageSize, cancellationToken);
+        var meals = await query.Select(x => new MealViewModel(x.Id, x.Title, x.StartTime, x.EndTime, x.Content, x.DietPlanId))
+                                .ToPagedListAsync(request.PageNumber, request.PageSize, cancellationToken);
 
 #endif
         return meals;

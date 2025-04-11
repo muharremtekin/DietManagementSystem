@@ -7,6 +7,6 @@ public class RouteConstants
     public const string auth = "api/auth";
     public const string meal = "api/meals";
     public const string dietPlan = "api/diet-plans";
-    public const string progress = "api/progress";
+    public const string progress = "api/progresses";
 }
 

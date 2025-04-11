@@ -19,10 +19,6 @@ public static class MigrationExtensions
             {
                 await context.Database.MigrateAsync();
 
-                //#if DEBUG
-                //                var seedData = new SeedData();
-                //                await seedData.SeedAsync(configuration);
-                //#endif
             }, maxRetries: 10, delayMs: 10000,
             onError: (ex, attempt) => logger.LogWarning(ex, "Migration attempt {Attempt} failed", attempt));
         }
