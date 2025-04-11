@@ -61,7 +61,7 @@ A comprehensive diet management system built with .NET 8, designed to help dieti
 
 ### Backend
 - **Framework**: .NET 8
-- **Architecture**: Clean Architecture with CQRS
+- **Architecture**: Layered Architecture with CQRS
 - **ORM**: Entity Framework Core
 - **Authentication**: JWT with ASP.NET Identity
 - **Validation**: FluentValidation
@@ -316,7 +316,7 @@ docker-compose up -d
 5. Open a Pull Request
 
 ### Development Guidelines
-- Follow Clean Architecture principles
+- Follow Layered Architecture principles
 - Write unit tests for new features
 - Use meaningful commit messages
 - Update documentation
