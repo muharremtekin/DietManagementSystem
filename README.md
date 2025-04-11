@@ -210,7 +210,8 @@ DietManagementSystem/
      ```
 
 4. **Initial Setup**
-   - Access Swagger UI at `https://localhost:5001/swagger`
+   - Access Swagger UI at `https://localhost:8081/swagger`
+   - Access Swagger UI at `http://localhost:8080/swagger`
    - Default admin credentials:
      - Email: admin@diet.com
      - UserName: "admin"
