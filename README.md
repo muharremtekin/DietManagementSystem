@@ -120,12 +120,21 @@ DietManagementSystem/
 ## 🚀 Getting Started
 
 ### Prerequisites
+
+#### Windows
 - [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
 - [PostgreSQL](https://www.postgresql.org/download/)
-- [Docker](https://www.docker.com/products/docker-desktop) (optional)
+- [Docker Desktop for Windows](https://www.docker.com/products/docker-desktop) (optional)
+
+#### macOS
+- [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
+- [PostgreSQL](https://www.postgresql.org/download/macosx/) or [Postgres.app](https://postgresapp.com/)
+- [Docker Desktop for Mac](https://www.docker.com/products/docker-desktop) (optional)
+- [Homebrew](https://brew.sh/) (recommended for package management)
 
 ### Installation
 
+#### Windows Installation
 1. **Clone the Repository**
    ```bash
    git clone https://github.com/yourusername/DietManagementSystem.git
@@ -148,12 +157,140 @@ DietManagementSystem/
    dotnet run --project src/DietManagementSystem.WebApi
    ```
 
+#### macOS Installation
+1. **Install Dependencies**
+   ```bash
+   # Install .NET SDK
+   brew install --cask dotnet-sdk
+
+   # Install PostgreSQL (if not using Docker)
+   brew install postgresql@14
+   brew services start postgresql@14
+
+   # Install Docker Desktop (if using Docker)
+   brew install --cask docker
+   ```
+
+2. **Clone the Repository**
+   ```bash
+   git clone https://github.com/yourusername/DietManagementSystem.git
+   cd DietManagementSystem
+   ```
+
+3. **Database Setup**
+   ```bash
+   # Using Docker
+   docker-compose -f dms_local_compose/docker-compose.yml up -d
+   
+   # Or using PostgreSQL installed via Homebrew
+   createdb diet_management_db
+   # Update connection string in appsettings.json
+   ```
+
+4. **Build and Run**
+   ```bash
+   dotnet restore
+   dotnet build
+   dotnet run --project src/DietManagementSystem.WebApi
+   ```
+
+5. **Troubleshooting on macOS**
+   - If you encounter permission issues:
+     ```bash
+     sudo chown -R $(whoami) /usr/local/share/dotnet
+     ```
+   - If PostgreSQL connection fails:
+     ```bash
+     brew services restart postgresql@14
+     ```
+   - If Docker issues occur:
+     ```bash
+     open -a Docker
+     # Wait for Docker to start, then try again
+     ```
+
 4. **Initial Setup**
    - Access Swagger UI at `https://localhost:5001/swagger`
    - Default admin credentials:
      - Email: admin@diet.com
      - UserName: "admin"
      - Password: Admin123!
+
+### Running Tests
+
+#### Windows
+1. **Run All Tests**
+   ```bash
+   dotnet test
+   ```
+
+2. **Run Specific Test Project**
+   ```bash
+   dotnet test src/DietManagementSystem.Tests
+   ```
+
+3. **Run Tests with Coverage**
+   ```bash
+   # Install coverlet if not already installed
+   dotnet tool install -g coverlet.console
+
+   # Run tests with coverage
+   dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+   ```
+
+4. **View Test Results**
+   - Test results will be displayed in the console
+   - For detailed results, check the `TestResults` folder in each test project
+
+#### macOS
+1. **Run All Tests**
+   ```bash
+   dotnet test
+   ```
+
+2. **Run Specific Test Project**
+   ```bash
+   dotnet test src/DietManagementSystem.Tests
+   ```
+
+3. **Run Tests with Coverage**
+   ```bash
+   # Install coverlet if not already installed
+   dotnet tool install -g coverlet.console
+
+   # Run tests with coverage
+   dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+   ```
+
+4. **View Test Results**
+   - Test results will be displayed in the console
+   - For detailed results, check the `TestResults` folder in each test project
+
+5. **Troubleshooting on macOS**
+   - If you encounter permission issues:
+     ```bash
+     sudo chown -R $(whoami) /usr/local/share/dotnet
+     ```
+   - If tests fail due to database connection:
+     ```bash
+     # Make sure PostgreSQL is running
+     brew services start postgresql@14
+     ```
+
+### Test Categories
+- **Unit Tests**: `[Fact]` attribute
+- **Integration Tests**: `[Trait("Category", "Integration")]` attribute
+- **Database Tests**: `[Trait("Category", "Database")]` attribute
+
+To run specific categories:
+```bash
+# Run only integration tests
+dotnet test --filter "Category=Integration"
+
+# Run only database tests
+dotnet test --filter "Category=Database"
+```
+
 
 ## 🔒 Security
 
@@ -269,35 +406,4 @@ The Progress Controller manages client progress tracking.
 - **Update Progress Record**: `PUT /api/v1/progress/{progressId}`
 - **Delete Progress Record**: `DELETE /api/v1/progress/{progressId}`
 - **Get Progress Record by ID**: `GET /api/v1/progress/{progressId}`
-- **Get All Progress Records**: `GET /api/v1/progress`
-
-For detailed request/response examples, see [ProgressControllerExamples.md](src/DietManagementSystem.WebApi/Documentation/ProgressControllerExamples.md)
-
-### Common Response Codes
-
-- **200 OK**: Request successful
-- **201 Created**: Resource created successfully
-- **204 No Content**: Request successful, no content to return
-- **400 Bad Request**: Invalid request parameters
-- **401 Unauthorized**: Authentication required
-- **403 Forbidden**: Insufficient permissions
-- **404 Not Found**: Resource not found
-- **500 Internal Server Error**: Server error
-
-### Pagination
-Endpoints that return lists support pagination using the following query parameters:
-- `pageNumber`: The page number (1-based)
-- `pageSize`: Number of items per page
-
-Response includes pagination metadata in the `X-Pagination` header.
-
-### Error Handling
-All error responses follow a consistent format:
-```json
-{
-    "message": "Error description",
-    "errors": {
-        "fieldName": ["Error message"]
-    }
-}
-```
+- **Get All Progress Records**: `
