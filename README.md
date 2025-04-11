@@ -277,6 +277,7 @@ DietManagementSystem/
      brew services start postgresql@14
      ```
 
+
 ### Test Categories
 - **Unit Tests**: `[Fact]` attribute
 - **Integration Tests**: `[Trait("Category", "Integration")]` attribute
@@ -407,3 +408,4 @@ The Progress Controller manages client progress tracking.
 - **Delete Progress Record**: `DELETE /api/v1/progress/{progressId}`
 - **Get Progress Record by ID**: `GET /api/v1/progress/{progressId}`
 - **Get All Progress Records**: `
+
