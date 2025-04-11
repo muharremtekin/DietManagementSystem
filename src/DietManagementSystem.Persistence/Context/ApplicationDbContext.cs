@@ -14,6 +14,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityR
 
     public DbSet<DietPlan> DietPlans { get; set; }
     public DbSet<Meal> Meals { get; set; }
+    public DbSet<Progress> Progress { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
