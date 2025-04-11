@@ -1,264 +1,337 @@
-# Diet Management System
+# 🥗 Diet Management System
 
-A comprehensive diet management system built with .NET 8, designed to help dietitians manage their clients' diet plans and track their progress.
+A comprehensive diet management system built with .NET 8, designed to help dietitians manage their clients' diet plans and track their progress effectively.
+
+## 📋 Table of Contents
+
+- [Database Schema](#-database-schema)
+- [Features](#-features)
+- [Technology Stack](#-technology-stack)
+- [Project Structure](#-project-structure)
+- [Getting Started](#-getting-started)
+- [API Documentation](#-api-documentation)
+- [Security](#-security)
+- [Deployment](#-deployment)
+- [Contributing](#-contributing)
+- [License](#-license)
+- [Author](#-author)
+
+## 📊 Database Schema
+
+![Database Schema](images/DietManagementLocalDb-scheme.png)
 
 ## 🚀 Features
 
-- **User Management**
-  - Role-based authentication (Admin, Dietitian, User)
-  - Secure user registration and login
-  - User profile management
-  - Password reset functionality
+### User Management
+- **Role-based Access Control**
+  - Admin: Full system access
+  - Dietitian: Client and diet plan management
+  - Client: View assigned plans and track progress
+- **Authentication & Authorization**
+  - JWT-based authentication
+  - Secure password hashing
+  - Role-based authorization policies
 
-- **Diet Plan Management**
-  - Create and manage diet plans
-  - Assign diet plans to clients
-  - Track meal schedules and content
-  - Customize diet plans based on client needs
+### Diet Plan Management
+- **Comprehensive Plan Creation**
+  - Customizable meal schedules
+  - Nutritional requirements tracking
+  - Client-specific adjustments
+  - Progress monitoring integration
+- **Plan Assignment**
+  - Multiple client assignments
+  - Plan versioning
+  - Historical tracking
 
-- **Meal Management**
-  - Create and update meals
-  - Set meal times and content
-  - Organize meals within diet plans
+### Meal Management
+- **Detailed Meal Planning**
   - Nutritional information tracking
+  - Ingredient management
+  - Portion control
+  - Meal timing scheduling
+- **Meal Categories**
+  - Breakfast, lunch, dinner
+  - Snacks and supplements
+  - Special dietary requirements
 
-- **Progress Tracking**
-  - Monitor client progress
-  - Track measurements and goals
-  - Generate progress reports
-  - Visual progress charts
+### Progress Tracking
+- **Comprehensive Monitoring**
+  - Weight tracking
+  - Body measurements
+  - Nutritional intake
+  - Goal setting and tracking
 
 ## 🛠️ Technology Stack
 
-- **Backend**
-  - .NET 8
-  - Entity Framework Core
-  - MediatR for CQRS pattern
-  - FluentValidation for request validation
-  - JWT Authentication
-  - AutoMapper for object mapping
-  - Swagger for API documentation
+### Backend
+- **Framework**: .NET 8
+- **Architecture**: Clean Architecture with CQRS
+- **ORM**: Entity Framework Core
+- **Authentication**: JWT with ASP.NET Identity
+- **Validation**: FluentValidation
+- **Documentation**: Swagger/OpenAPI
+- **Testing**: nUnit, Moq, FluentAssertions
 
-- **Database**
-  - PostgreSQL
-  - Entity Framework Core Migrations
-  - Npgsql.EntityFrameworkCore.PostgreSQL
+### Database
+- **Primary Database**: PostgreSQL
+- **ORM**: Entity Framework Core
+- **Migrations**: EF Core Migrations
+- **Connection**: Npgsql.EntityFrameworkCore.PostgreSQL
 
-- **Development Tools**
-  - Visual Studio 2022 / VS Code
-  - Git for version control
-  - Postman for API testing
-  - pgAdmin for database management
+### Development Tools
+- **IDE**: Visual Studio 2022 / VS Code
+- **Version Control**: Git
+- **API Testing**: Postman
+- **Database Management**: DBeaver
+- **Containerization**: Docker
 
 ## 📁 Project Structure
 
 ```
 DietManagementSystem/
 ├── src/
-│   ├── DietManagementSystem.Domain/         # Domain entities and interfaces
+│   ├── DietManagementSystem.Domain/         # Domain layer
 │   │   ├── Entities/                        # Domain models
-│   │   └── Interfaces/                      # Repository interfaces
 │   │
-│   ├── DietManagementSystem.Application/    # Application logic and features
+│   ├── DietManagementSystem.Application/    # Application layer
 │   │   ├── Features/                        # CQRS handlers
-│   │   ├── Validators/                      # FluentValidation rules
+│   │   │   ├── User/                       # User-related features
+│   │   │   ├── DietPlan/                   # Diet plan features
+│   │   │   ├── Meal/                       # Meal features
+│   │   │   └── Progress/                   # Progress tracking
+│   │   ├── Validators/                      # Validation rules
 │   │   ├── DTOs/                           # Data transfer objects
 │   │   └── Extensions/                      # Service extensions
 │   │
-│   ├── DietManagementSystem.Persistence/    # Database context and repositories
+│   ├── DietManagementSystem.Persistence/    # Infrastructure layer
 │   │   ├── Context/                         # DbContext
+│   │   ├── Interfaces/                      # Repository interfaces
 │   │   ├── Repositories/                    # Repository implementations
-│   │   └── Configurations/                  # Entity configurations
+│   │   ├── Configurations/                  # Entity configurations
+│   │   └── Seed/                           # Data seeding
 │   │
-│   └── DietManagementSystem.WebApi/         # API endpoints and controllers
-│       ├── Controllers/                     # API controllers
+│   └── DietManagementSystem.WebApi/         # Presentation layer
+│       ├── Controllers/                     # API endpoints
 │       ├── Extensions/                      # Web API extensions
-│       └── Middleware/                      # Custom middleware
+│       ├── Middleware/                      # Custom middleware
+│       └── Filters/                         # Action filters
 ```
 
-## 🔧 Setup and Installation
+## 🚀 Getting Started
 
 ### Prerequisites
 
-1. **Development Environment**
-   - [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
-   - [PostgreSQL](https://www.postgresql.org/download/)
-   - [pgAdmin](https://www.pgadmin.org/download/) (optional, for database management)
-   - [Visual Studio 2022](https://visualstudio.microsoft.com/) or [VS Code](https://code.visualstudio.com/)
-   - [Git](https://git-scm.com/downloads)
+#### Windows
+- [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
+- [PostgreSQL](https://www.postgresql.org/download/)
+- [Docker Desktop for Windows](https://www.docker.com/products/docker-desktop) (optional)
+
+#### macOS
+- [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
+- [PostgreSQL](https://www.postgresql.org/download/macosx/) or [Postgres.app](https://postgresapp.com/)
+- [Docker Desktop for Mac](https://www.docker.com/products/docker-desktop) (optional)
+- [Homebrew](https://brew.sh/) (recommended for package management)
+
+### Installation
+
+#### Windows Installation
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/yourusername/DietManagementSystem.git
+   cd DietManagementSystem
+   ```
 
 2. **Database Setup**
    ```bash
-   # Create a new PostgreSQL database
+   # Using Docker
+   docker-compose -f dms_local_compose/docker-compose.yml up -d
+   
+   # Or manually create PostgreSQL database
    # Update connection string in appsettings.json
-   "ConnectionStrings": {
-     "DefaultConnection": "Host=localhost;Database=dietmanagementsystem;Username=postgres;Password=yourpassword"
-   }
    ```
 
-3. **Clone and Build**
+3. **Build and Run**
    ```bash
-   # Clone the repository
+   dotnet restore
+   dotnet build
+   dotnet run --project src/DietManagementSystem.WebApi
+   ```
+
+#### macOS Installation
+1. **Install Dependencies**
+   ```bash
+   # Install .NET SDK
+   brew install --cask dotnet-sdk
+
+   # Install PostgreSQL (if not using Docker)
+   brew install postgresql@14
+   brew services start postgresql@14
+
+   # Install Docker Desktop (if using Docker)
+   brew install --cask docker
+   ```
+
+2. **Clone the Repository**
+   ```bash
    git clone https://github.com/yourusername/DietManagementSystem.git
    cd DietManagementSystem
+   ```
 
-   # Restore NuGet packages
+3. **Database Setup**
+   ```bash
+   # Using Docker
+   docker-compose -f dms_local_compose/docker-compose.yml up -d
+   
+   # Or using PostgreSQL installed via Homebrew
+   createdb diet_management_db
+   # Update connection string in appsettings.json
+   ```
+
+4. **Build and Run**
+   ```bash
    dotnet restore
-
-   # Build the solution
    dotnet build
+   dotnet run --project src/DietManagementSystem.WebApi
    ```
 
-4. **Database Migration**
-   ```bash
-   # Navigate to the WebApi project
-   cd src/DietManagementSystem.WebApi
+5. **Troubleshooting on macOS**
+   - If you encounter permission issues:
+     ```bash
+     sudo chown -R $(whoami) /usr/local/share/dotnet
+     ```
+   - If PostgreSQL connection fails:
+     ```bash
+     brew services restart postgresql@14
+     ```
+   - If Docker issues occur:
+     ```bash
+     open -a Docker
+     # Wait for Docker to start, then try again
+     ```
 
-   # Run migrations
-   dotnet ef database update
-   ```
-
-5. **Seed Initial Data**
-   ```bash
-   # The system will automatically create default roles and admin user
-   # Default admin credentials:
-   # Email: admin@dietmanagement.com
-   # Password: Admin123!
-   ```
-
-## 🧪 Testing
+4. **Initial Setup**
+   - Access Swagger UI at `https://localhost:5001/swagger`
+   - Default admin credentials:
+     - Email: admin@diet.com
+     - UserName: "admin"
+     - Password: Admin123!
 
 ### Running Tests
+
+#### Windows
+1. **Run All Tests**
+   ```bash
+   dotnet test
+   ```
+
+2. **Run Specific Test Project**
+   ```bash
+   dotnet test src/DietManagementSystem.Tests
+   ```
+
+3. **Run Tests with Coverage**
+   ```bash
+   # Install coverlet if not already installed
+   dotnet tool install -g coverlet.console
+
+   # Run tests with coverage
+   dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+   ```
+
+4. **View Test Results**
+   - Test results will be displayed in the console
+   - For detailed results, check the `TestResults` folder in each test project
+
+#### macOS
+1. **Run All Tests**
+   ```bash
+   dotnet test
+   ```
+
+2. **Run Specific Test Project**
+   ```bash
+   dotnet test src/DietManagementSystem.Tests
+   ```
+
+3. **Run Tests with Coverage**
+   ```bash
+   # Install coverlet if not already installed
+   dotnet tool install -g coverlet.console
+
+   # Run tests with coverage
+   dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+   ```
+
+4. **View Test Results**
+   - Test results will be displayed in the console
+   - For detailed results, check the `TestResults` folder in each test project
+
+5. **Troubleshooting on macOS**
+   - If you encounter permission issues:
+     ```bash
+     sudo chown -R $(whoami) /usr/local/share/dotnet
+     ```
+   - If tests fail due to database connection:
+     ```bash
+     # Make sure PostgreSQL is running
+     brew services start postgresql@14
+     ```
+
+
+### Test Categories
+- **Unit Tests**: `[Fact]` attribute
+- **Integration Tests**: `[Trait("Category", "Integration")]` attribute
+- **Database Tests**: `[Trait("Category", "Database")]` attribute
+
+To run specific categories:
 ```bash
-# Navigate to the test project
-cd src/DietManagementSystem.Tests
-
-# Run all tests
-dotnet test
-
-# Run specific test category
-dotnet test --filter "Category=Unit"
+# Run only integration tests
 dotnet test --filter "Category=Integration"
+
+# Run only database tests
+dotnet test --filter "Category=Database"
 ```
 
-### API Testing with Postman
-1. Import the Postman collection from `/docs/postman/DietManagementSystem.postman_collection.json`
-2. Set up environment variables:
-   - `baseUrl`: Your API base URL
-   - `token`: JWT token (will be set after login)
 
-### Testing Different User Roles
-1. **Admin User**
-   - Full access to all features
-   - Can manage all users and diet plans
+## 🔒 Security
 
-2. **Dietitian User**
-   - Can manage their clients and diet plans
-   - Can track client progress
+### Authentication
+- JWT-based authentication
+- Secure password hashing
+- Role-based authorization
 
-3. **Regular User**
-   - Can view assigned diet plans
-   - Can track their own progress
+### Data Protection
+- Input validation
+- SQL injection prevention
+- XSS protection
+- CORS policy
+- HTTPS enforcement
+
+### Best Practices
+- Secure headers
+- Request validation
+- Error handling
+- Logging and monitoring
 
 ## 🚀 Deployment
 
 ### Development Environment
-1. **Local Development with Docker**
-   ```bash
-   # Navigate to the local compose directory
-   cd dms_local_compose
+```bash
+# Using Docker
+docker-compose -f dms_local_compose/docker-compose.yml up -d
 
-   # Start the PostgreSQL container
-   docker-compose up -d
-   ```
-
-   The local development environment will use:
-   - Database: DietManagementLocalDb
-   - Username: admin
-   - Password: password
-   - Port: 5432
-
-2. **Local Development without Docker**
-   ```bash
-   # Run the application
-   dotnet run --project src/DietManagementSystem.WebApi
-   ```
+# Or run directly
+dotnet run --project src/DietManagementSystem.WebApi
+```
 
 ### Production Environment
-1. **Production Deployment with Docker**
-   ```bash
-   # Start the production containers
-   docker-compose up -d
-   ```
+```bash
+# Build and run with Docker
+docker-compose up -d
 
-   The production environment will use:
-   - Database: DietManagementProductionDb
-   - Username: dms_admin
-   - Password: [secure password]
-   - Port: 5432
-   - API Port: 8080
-
-2. **Environment Configuration**
-   - Local Development (`dms_local_compose/docker-compose.yml`)
-     - PostgreSQL container with local settings
-     - Development database configuration
-     - Local network setup
-
-   - Production (`docker-compose.yml`)
-     - PostgreSQL container with production settings
-     - Production database configuration
-     - Secure network setup
-     - API container with production settings
-
-3. **Database Connection Strings**
-   - Local Development:
-     ```
-     Host=localhost;Database=DietManagementLocalDb;Username=admin;Password=password
-     ```
-   
-   - Production:
-     ```
-     Host=postgresql;Database=DietManagementProductionDb;Username=dms_admin;Password=[secure password]
-     ```
-
-## 📝 API Documentation
-
-The API documentation is available at `/swagger` when running the application in development mode.
-
-### Key Endpoints
-
-- **Authentication**
-  - `POST /api/auth/login` - User login
-
-- **Diet Plans**
-  - `GET /api/diet-plans` - Get all diet plans
-  - `POST /api/diet-plans` - Create a new diet plan
-  - `PUT /api/diet-plans/{id}` - Update a diet plan
-  - `DELETE /api/diet-plans/{id}` - Delete a diet plan
-  - `GET /api/diet-plans/{id}/meals` - Get meals for a diet plan
-
-- **Meals**
-  - `GET /api/meals` - Get all meals
-  - `POST /api/meals` - Create a new meal
-  - `PUT /api/meals/{id}` - Update a meal
-  - `DELETE /api/meals/{id}` - Delete a meal
-
-- **Progress**
-  - `GET /api/progress` - Get progress records
-  - `POST /api/progress` - Create a new progress record
-  - `PUT /api/progress/{id}` - Update a progress record
-  - `GET /api/progress/statistics` - Get progress statistics
-
-## 🔒 Security
-
-- JWT-based authentication with refresh tokens
-- Role-based authorization
-- Secure password hashing using ASP.NET Identity
-- Input validation using FluentValidation
-- CORS policy configuration
-- HTTPS enforcement in production
-- SQL injection prevention
-- XSS protection
+# Or deploy to Azure/AWS
+# Follow platform-specific deployment guides
+```
 
 ## 🤝 Contributing
 
@@ -269,21 +342,70 @@ The API documentation is available at `/swagger` when running the application in
 5. Open a Pull Request
 
 ### Development Guidelines
-- Follow SOLID principles
+- Follow Clean Architecture principles
 - Write unit tests for new features
 - Use meaningful commit messages
-- Update documentation when necessary
-- Follow the existing code style
+- Update documentation
+- Follow existing code style
 
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 👥 Authors
+## 👥 Author
 
-- Your Name - Initial work
+- Muharrem TEKIN
 
-## 🙏 Acknowledgments
+## 📚 API Documentation
 
-- Thanks to all contributors who have helped shape this project
-- Special thanks to the .NET community for their excellent tools and libraries
+The API follows RESTful principles and uses JWT authentication. All endpoints require an Authorization header with a valid JWT token.
+
+### Authentication
+All API requests must include the following header:
+```plaintext
+Authorization: Bearer {your_jwt_token}
+```
+
+### Controllers
+
+#### Admin Controller
+The Admin Controller manages administrator accounts and system-wide operations.
+
+- **Create Administrator**: `POST /api/v1/admins`
+- **Update Administrator**: `PUT /api/v1/admins/{userId}`
+- **Delete Administrator**: `DELETE /api/v1/admins/{userId}`
+- **Get All Administrators**: `GET /api/v1/admins`
+
+For detailed request/response examples, see [AdminControllerExamples.md](src/DietManagementSystem.WebApi/Documentation/AdminControllerExamples.md)
+
+#### Dietitian Controller
+The Dietitian Controller manages dietitian accounts and their operations.
+
+- **Create Dietitian**: `POST /api/v1/dietitians`
+- **Update Dietitian**: `PUT /api/v1/dietitians/{userId}`
+- **Delete Dietitian**: `DELETE /api/v1/dietitians/{userId}`
+- **Get All Dietitians**: `GET /api/v1/dietitians`
+
+For detailed request/response examples, see [DietitianControllerExamples.md](src/DietManagementSystem.WebApi/Documentation/DietitianControllerExamples.md)
+
+#### Meal Controller
+The Meal Controller manages meal planning and scheduling.
+
+- **Create Meal**: `POST /api/v1/meals`
+- **Update Meal**: `PUT /api/v1/meals/{mealId}`
+- **Delete Meal**: `DELETE /api/v1/meals/{mealId}`
+- **Get Meal by ID**: `GET /api/v1/meals/{mealId}`
+- **Get All Meals**: `GET /api/v1/meals`
+- **Get Meals by Diet Plan**: `GET /api/v1/meals/dietplan/{dietPlanId}`
+
+For detailed request/response examples, see [MealControllerExamples.md](src/DietManagementSystem.WebApi/Documentation/MealControllerExamples.md)
+
+#### Progress Controller
+The Progress Controller manages client progress tracking.
+
+- **Create Progress Record**: `POST /api/v1/progress`
+- **Update Progress Record**: `PUT /api/v1/progress/{progressId}`
+- **Delete Progress Record**: `DELETE /api/v1/progress/{progressId}`
+- **Get Progress Record by ID**: `GET /api/v1/progress/{progressId}`
+- **Get All Progress Records**: `
+
