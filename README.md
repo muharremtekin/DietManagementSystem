@@ -229,10 +229,6 @@ The API documentation is available at `/swagger` when running the application in
 
 - **Authentication**
   - `POST /api/auth/login` - User login
-  - `POST /api/auth/register` - User registration
-  - `POST /api/auth/refresh-token` - Refresh JWT token
-  - `POST /api/auth/forgot-password` - Request password reset
-  - `POST /api/auth/reset-password` - Reset password
 
 - **Diet Plans**
   - `GET /api/diet-plans` - Get all diet plans
